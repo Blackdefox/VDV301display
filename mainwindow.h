@@ -11,7 +11,7 @@
 #include "VDV301struktury/zastavkacil.h"
 #include "VDV301struktury/prestup.h"
 #include "pasmovedvojicelcd.h"
-#include "svgvykreslovani.h"
+#include "svgrenderer.h"
 #include "labelvykreslovani.h"
 #include "barvylinek.h"
 
@@ -71,7 +71,7 @@ private:
     LabelVykreslovani labelVykreslovani;
 
     CisSubscriber cisSubscriber;
-    SvgVykreslovani svgVykreslovani;
+    SvgRenderer svgVykreslovani;
     DeviceManagementService deviceManagementService1_0;
     QSettings settings;
 
@@ -187,8 +187,8 @@ private:
     void hlavniVymazObrazovku();
     void hlavniZobrazAnnoucement(QString title, QString type, QString textCz, QString textEn);
     void hlavniZobrazZmenuPasma(QVector<Pasmo> zPasem, QVector<Pasmo> naPasma);
-    void naplnPoleLinky(QString subMode, Linka line, QLabel *label, int velikostPiktogramu, bool prestup);
-    void naplnPoleLinky2_4(QString subMode, Linka line, QLabel *label, int velikostPiktogramu, bool prestup);
+    void naplnPoleLinky(QString subMode, Line line, QLabel *label, int velikostPiktogramu, bool prestup);
+    void naplnPoleLinky2_4(QString subMode, Line line, QLabel *label, int velikostPiktogramu, bool prestup);
 
     QVector<QWidget*> strankyKeStridani;
 

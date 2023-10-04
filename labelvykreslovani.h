@@ -10,7 +10,7 @@
 #include <QtMath>
 
 #include "VDV301struktury/pasmo.h"
-#include "svgvykreslovani.h"
+#include "svgrenderer.h"
 #include "inlineformatparser.h"
 
 

@@ -17,7 +17,7 @@ QString LabelVykreslovani::vyrobTextZmenyPasma(QVector<Pasmo> zPasem, QVector<Pa
 {
     qDebug() << "LabelVykreslovani::vyrobTextZmenyPasma";
     QString vysledek = "";
-    vysledek += "prosím pozor! Změna tarifního pásma: " + SvgVykreslovani::pasmaDoStringu(zPasem) + "->" + SvgVykreslovani::pasmaDoStringu(naPasma);
+    vysledek += "prosím pozor! Změna tarifního pásma: " + SvgRenderer::pasmaDoStringu(zPasem) + "->" + SvgRenderer::pasmaDoStringu(naPasma);
 
     return vysledek;
 }

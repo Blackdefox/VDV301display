@@ -1,15 +1,15 @@
-#ifndef SVGVYKRESLOVANI_H
-#define SVGVYKRESLOVANI_H
+#ifndef SVGRENDERER_H
+#define SVGRENDERER_H
 #include <QWidget>
 #include <QDomDocument>
 #include <VDV301struktury/zastavka.h>
 #include <VDV301struktury/zastavkacil.h>
 #include "VDV301struktury/cestaudaje.h"
 
-class SvgVykreslovani
+class SvgRenderer
 {
 public:
-    SvgVykreslovani(QString cesta);
+    SvgRenderer(QString cesta);
     QString interniCestaSlozkaSvg="";
     bool svgReplaceName(QString souborVstup, QString souborVystup, QString cil, QString zst0, QString zst1, QString zst2);
     bool individualniNahrazeni(QDomDocument &xmlDocument, QString hledaneId, QString novaHodnota);
@@ -36,4 +36,4 @@ private:
 
 };
 
-#endif // SVGVYKRESLOVANI_H
+#endif // SVGRENDERER_H

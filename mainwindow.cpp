@@ -213,13 +213,13 @@ void MainWindow::natahniKonstanty()
 
     if(podporovaneVerze.contains(verzeVdv301))
     {
-        cisSubscriber.setVerze(verzeVdv301);
+        cisSubscriber.setVersion(verzeVdv301);
     }
     else
     {
         vyskakovaciOkno("verze "+verzeVdv301+" neni podporována!");
     }
-    cisSubscriber.setCisloPortu(settings.value("cisSubscriber/port").toUInt());
+    cisSubscriber.setPortNumber(settings.value("cisSubscriber/port").toUInt());
 
     prepniObrazovku(settings.value("konstanty/defaultniObrazovka").toInt());
     if(settings.value("konstanty/fullscreen").toBool()==true)
@@ -270,7 +270,7 @@ void MainWindow::vsechnyConnecty()
 {
     qDebug() <<  Q_FUNC_INFO;
     connect(&cisSubscriber, &IbisIpSubscriber::dataNahrana  ,this, &MainWindow::slotXmlDoPromenne);
-    connect(&cisSubscriber,&IbisIpSubscriber::signalAktualizaceSeznamu,this,&MainWindow::slotAktualizaceTabulkySluzeb);
+    connect(&cisSubscriber,&IbisIpSubscriber::signalUpdateList,this,&MainWindow::slotAktualizaceTabulkySluzeb);
     connect(cisSubscriber.timer,&QTimer::timeout ,this,&MainWindow::vyprselCasovacSluzby);
     connect(&cisSubscriber,&IbisIpSubscriber::signalZtrataOdberu ,this,&MainWindow::slotZtrataOdberu);
     connect(&cisSubscriber,&IbisIpSubscriberOnePublisher::signalUspesnySubscribe,this,&MainWindow::slotPublisherDoTabulky);
@@ -356,7 +356,7 @@ void MainWindow::slotPosunNacestnych()
     if (abs(posunRotovani)>delkaTextu)
     {
         posunRotovani=0;
-        labelVykreslovani.vykresliNacestneForce(globalniSeznamZastavek,stavSystemu,ui->label_nacestne,cisSubscriber.verze());
+        labelVykreslovani.vykresliNacestneForce(globalniSeznamZastavek,stavSystemu,ui->label_nacestne,cisSubscriber.version());
     }
 
     else
@@ -370,7 +370,7 @@ void MainWindow::slotPosunNacestnych()
 void MainWindow::slotAktualizaceTabulkySluzeb()
 {
     qDebug() <<  Q_FUNC_INFO;
-    vykresliSluzbyDoTabulky(cisSubscriber.seznamSluzeb);
+    vykresliSluzbyDoTabulky(cisSubscriber.listOfServices);
 }
 
 void MainWindow::vyprselCasovacSluzby()
@@ -645,8 +645,8 @@ void MainWindow::hlavniVykresliCisloLinky(ZastavkaCil aktZastavka,QString subMod
     qDebug() <<  Q_FUNC_INFO;
     //  labelVykreslovani.naplnCisloLinkyLabel(alias,ui->Llinka);
     qDebug()<<"vypis linky:"<<aktZastavka.cil.NameLcd<<" "<<aktZastavka.linka.LineName<<" vylukova:"<<aktZastavka.linka.isDiversion ;
-
-    if(cisSubscriber.verze()=="2.4")
+    
+    if(cisSubscriber.version()=="2.4")
     {
         naplnPoleLinky2_4(subMode,aktZastavka.linka,ui->label_linka, qFloor(pomerPixelBod*200),false);
 
@@ -743,8 +743,8 @@ void MainWindow::jednaZastavkaCilDoLabelu(ZastavkaCil aktualniZastavka, bool nav
 {
     PasmoveDvojiceLcd pasmoveDvojiceLcd;
     pasmoveDvojiceLcd.roztridPasma(aktualniZastavka.zastavka.seznamPasem);
-
-    if(cisSubscriber.verze()=="2.4")
+    
+    if(cisSubscriber.version()=="2.4")
     {
         //   QString nahradIconPiktogramem(QString vstup);
         //   nazevZastavky->setText(labelVykreslovani.zabalHtmlDoZnacek(labelVykreslovani.nahradIconPiktogramem( aktualniZastavka.zastavka.NameLcd, nazevZastavky->font().pixelSize(),labelVykreslovani.slozkaPiktogramu )));
@@ -819,8 +819,8 @@ void MainWindow::hlavniVykresliNacestne()
         ui->label_nacestne->setText("");
         return;
     }
-
-    QString novyVstup=labelVykreslovani.vykresliNacestneZastavkyText(globalniSeznamZastavek.at(stavSystemu.indexAktZastavky).nacestneZastavky, ui->label_nacestne->font().pixelSize(),cisSubscriber.verze());
+    
+    QString novyVstup=labelVykreslovani.vykresliNacestneZastavkyText(globalniSeznamZastavek.at(stavSystemu.indexAktZastavky).nacestneZastavky, ui->label_nacestne->font().pixelSize(),cisSubscriber.version());
 
 
 
@@ -845,8 +845,8 @@ int MainWindow::doplneniPromennych()
     {
         ZastavkaCil aktualniZastavka=globalniSeznamZastavek.at(indexZastavky);
         nazevLinky=aktualniZastavka.linka.LineName;
-
-        if(cisSubscriber.verze()=="2.4")
+        
+        if(cisSubscriber.version()=="2.4")
         {
             //nazevCile=labelVykreslovani.zabalHtmlDoZnacek(labelVykreslovani.nahradIconPiktogramem(aktualniZastavka.cil.NameLcd,ui->Lcil->font().pixelSize(),labelVykreslovani.slozkaPiktogramu));
             nazevCile=labelVykreslovani.inlineFormatParser.vyparsujText(aktualniZastavka.cil.NameLcd,ui->Lcil->font().pixelSize(),labelVykreslovani.slozkaPiktogramu);
@@ -1104,23 +1104,23 @@ void MainWindow::slotXmlDoPromenne(QString vstupniXml)
     globalniSeznamZastavekNavaznehoSpoje.clear();
 
     qDebug()<<"timestamp:"<<instanceXMLparser.vyparsujTimestamp(instanceXMLparser.dokument).toString(Qt::ISODate);
-
-
-    if(cisSubscriber.verze()=="1.0")
+    
+    
+    if(cisSubscriber.version()=="1.0")
     {
         if(!instanceXMLparser.VytvorSeznamZastavek1_0(globalniSeznamZastavek,globalniSeznamZastavekNavaznehoSpoje, indexZastavky, pocetZastavek))
         {
             vymazObrazovku();
         }
     }
-    else if(cisSubscriber.verze()=="2.2CZ1.0")
+    else if(cisSubscriber.version()=="2.2CZ1.0")
     {
         if(!instanceXMLparser.VytvorSeznamZastavek2_2CZ1_0(globalniSeznamZastavek,globalniSeznamZastavekNavaznehoSpoje, indexZastavky, pocetZastavek))
         {
             vymazObrazovku();
         }
     }
-    else if(cisSubscriber.verze()=="2.4")
+    else if(cisSubscriber.version()=="2.4")
     {
         if(!instanceXMLparser.VytvorSeznamZastavek2_4(globalniSeznamZastavek,globalniSeznamZastavekNavaznehoSpoje, indexZastavky, pocetZastavek))
         {
@@ -1589,8 +1589,8 @@ void MainWindow::hlavniZobrazZmenuPasma(QVector<Pasmo> zPasem, QVector<Pasmo> na
     ui->stackedWidget_obrazovka->setCurrentWidget(ui->page_hlavni);
     ui->stackedWidget_prostredek->setCurrentWidget(ui->page_zmenaPasma);
 
-    ui->label_pasmo1->setText(SvgVykreslovani::pasmaDoStringu(Pasmo::vratPidPasma(zPasem,"PID")));
-    ui->label_pasmo2->setText(SvgVykreslovani::pasmaDoStringu(Pasmo::vratPidPasma(naPasma,"PID")));
+    ui->label_pasmo1->setText(SvgRenderer::pasmaDoStringu(Pasmo::vratPidPasma(zPasem,"PID")));
+    ui->label_pasmo2->setText(SvgRenderer::pasmaDoStringu(Pasmo::vratPidPasma(naPasma,"PID")));
 
     labelVykreslovani.naplnZmenaLabel(labelVykreslovani.vyrobTextZmenyPasma(zPasem,naPasma),ui->label_zmena);
 }
@@ -1726,10 +1726,10 @@ void MainWindow::hlavniVykresliPrestupy(QVector<Prestup> seznamPrestupu)
         Prestup aktualniPrestup=seznamPrestupu.at(i);
         seznamLabelPrestupCil.at(i)->setText(aktualniPrestup.destinationName);
         seznamLabelPrestupCil.at(i)->show();
-
-
-
-        if(cisSubscriber.verze()=="2.4")
+        
+        
+        
+        if(cisSubscriber.version()=="2.4")
         {
             naplnPoleLinky2_4(aktualniPrestup.subMode,aktualniPrestup.line, seznamLabelPrestupLinka.at(i), velikostPiktogramPrestupDynamic,true);
 
@@ -1749,7 +1749,7 @@ void MainWindow::hlavniVykresliPrestupy(QVector<Prestup> seznamPrestupu)
 }
 
 
-void MainWindow::naplnPoleLinky( QString subMode, Linka line, QLabel* label, int velikostPiktogramu,bool prestup)
+void MainWindow::naplnPoleLinky( QString subMode, Line line, QLabel* label, int velikostPiktogramu,bool prestup)
 {
     qDebug()<<Q_FUNC_INFO;
     QString linkaStyleSheetStandard="font-weight: bold;";
@@ -1799,7 +1799,7 @@ void MainWindow::naplnPoleLinky( QString subMode, Linka line, QLabel* label, int
     label->show();
 }
 
-void MainWindow::naplnPoleLinky2_4( QString subMode, Linka line, QLabel* label, int velikostPiktogramu,bool prestup)
+void MainWindow::naplnPoleLinky2_4( QString subMode, Line line, QLabel* label, int velikostPiktogramu,bool prestup)
 {
     qDebug()<<Q_FUNC_INFO;
 

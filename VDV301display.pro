@@ -55,6 +55,7 @@ SOURCES += \
     VDV301publisher/xmlcustomerinformationservice.cpp \
     VDV301publisher/xmldevicemanagementservice.cpp \
     VDV301publisher/xmlticketvalidationservice.cpp \
+    VDV301struktury/line.cpp \
     VDV301subscriber/cissubscriber.cpp \
     VDV301subscriber/devmgmtpublisherstruct.cpp \
     VDV301subscriber/devmgmtsubscriber.cpp \
@@ -66,10 +67,9 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     pasmovedvojicelcd.cpp \
-    svgvykreslovani.cpp \
+    svgrenderer.cpp \
     xmlparser.cpp \
     VDV301struktury/cestaudaje.cpp \
-    VDV301struktury/linka.cpp \
     VDV301struktury/obeh.cpp \
     VDV301struktury/pasmo.cpp \
     VDV301struktury/prestup.cpp \
@@ -92,6 +92,7 @@ HEADERS += \
     VDV301publisher/xmlcustomerinformationservice.h \
     VDV301publisher/xmldevicemanagementservice.h \
     VDV301publisher/xmlticketvalidationservice.h \
+    VDV301struktury/line.h \
     VDV301subscriber/cissubscriber.h \
     VDV301subscriber/devmgmtpublisherstruct.h \
     VDV301subscriber/devmgmtsubscriber.h \
@@ -102,10 +103,9 @@ HEADERS += \
     labelvykreslovani.h \
     mainwindow.h \
     pasmovedvojicelcd.h \
-    svgvykreslovani.h \
+    svgrenderer.h \
     xmlparser.h \
     VDV301struktury/cestaudaje.h \
-    VDV301struktury/linka.h \
     VDV301struktury/obeh.h \
     VDV301struktury/prestup.h \
     VDV301struktury/pasmo.h \

@@ -836,7 +836,7 @@ QVector<Prestup> XmlParser::nactiPrestupy(QDomElement vstup)
 }
 
 
-Linka XmlParser::priznakyDoLinky(QVector<QString> vstup, Linka vstupniLinka)
+Line XmlParser::priznakyDoLinky(QVector<QString> vstup, Line vstupniLinka)
 {
     qDebug()<<Q_FUNC_INFO;
     // qDebug()<<"linka je nocni:"<<vstupniLinka.isNight;

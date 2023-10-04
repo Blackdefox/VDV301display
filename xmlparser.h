@@ -37,7 +37,7 @@ public:
     int udajeNavaznehoSpoje(QVector<ZastavkaCil> &docasnySeznamZst, QString &linka, QString &cil);
     int existujeNavaznySpoj(QVector<ZastavkaCil> seznamZastavek);
     QVector<Prestup> nactiPrestupy(QDomElement vstup);
-    Linka priznakyDoLinky(QVector<QString> vstup, Linka vstupniLinka);
+    Line priznakyDoLinky(QVector<QString> vstup, Line vstupniLinka);
 
     QDateTime vyparsujTimestamp(QDomDocument vstupniDokument);
 

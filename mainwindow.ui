@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1088</width>
+    <width>1138</width>
     <height>888</height>
    </rect>
   </property>
@@ -89,8 +89,8 @@
           </font>
          </property>
          <property name="text">
-          <string>F1 Hlavní 
- obrazovka</string>
+          <string>F1
+main screen</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -147,8 +147,8 @@
           </font>
          </property>
          <property name="text">
-          <string>F4 Seznam 
- služeb</string>
+          <string>F4
+list services</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -166,7 +166,7 @@
           </font>
          </property>
          <property name="text">
-          <string>F5 Časovač</string>
+          <string>F5 Timer</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -314,7 +314,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string>verze:</string>
+              <string>version:</string>
              </property>
             </widget>
            </item>
@@ -644,7 +644,7 @@ QLabel{color:#FFFFFF}</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>712</width>
+                      <width>750</width>
                       <height>79</height>
                      </rect>
                     </property>
@@ -4490,7 +4490,7 @@ border-radius: 30px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1088</width>
+     <width>1138</width>
      <height>21</height>
     </rect>
    </property>
@@ -4499,7 +4499,7 @@ border-radius: 30px;
    </property>
    <widget class="QMenu" name="menunacti">
     <property name="title">
-     <string>nacti</string>
+     <string>Program</string>
     </property>
     <addaction name="actiontestPolozka"/>
     <addaction name="actionstahnoutXML"/>
@@ -4515,7 +4515,7 @@ border-radius: 30px;
   </widget>
   <action name="actiontestPolozka">
    <property name="text">
-    <string>testPolozka</string>
+    <string>Test item</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
@@ -4523,7 +4523,7 @@ border-radius: 30px;
   </action>
   <action name="actionstahnoutXML">
    <property name="text">
-    <string>stahnoutXML</string>
+    <string>Download XML</string>
    </property>
   </action>
   <action name="action">

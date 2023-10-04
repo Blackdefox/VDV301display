@@ -117,7 +117,7 @@ void BarvyLinek::naplnMapBarev()
 }
 
 
-StylLinkyOld BarvyLinek::linkaDoStylu(QString &subMode, Linka linka )
+StylLinkyOld BarvyLinek::linkaDoStylu(QString &subMode, Line linka )
 {
     qDebug()<<Q_FUNC_INFO;
     StylLinkyOld vystup;
